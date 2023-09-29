@@ -1,0 +1,22 @@
+.container {
+    padding: 20px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    /* space items evenly */
+    margin-top: 20px;
+    /* some top margin for breathing room */
+    flex-wrap: wrap;
+    /* allows wrapping onto the next line if too many items */
+}
+
+.linkItem {
+    margin: 0 10px;
+    /* horizontal margin */
+    text-decoration: none;
+    /* remove underline */
+    color: #ffc500;
+    /* Star Wars gold */
+}
