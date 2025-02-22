@@ -7,7 +7,7 @@ async function generateStaticParams() {
 }
 
 export default async function FilmPage({ params }) {
-  const { id } = params
+  const { id } = await params
   const film = await getFilm(id)
 
   return (
