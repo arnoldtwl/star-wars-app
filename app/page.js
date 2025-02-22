@@ -1,22 +1,54 @@
 import Link from 'next/link'
 import styles from './page.module.css'
-import { getFilms } from './lib/api'
+import { getFilms, routes } from './lib/api'
 
-export default async function Home() {
+export default async function HomePage() {
   const { results: films } = await getFilms()
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Star Wars Films</h1>
-      <ul className={styles.links}>
-        {films.map(film => (
-          <li key={film.episode_id}>
-            <Link href={`/film/${film.episode_id}`} className={styles.filmList}>
-              Episode {film.episode_id}: {film.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <section className={styles.hero}>
+        <h1 className={styles.heroTitle}>Welcome to Star Wars Universe</h1>
+        <p className={styles.heroSubtitle}>Explore the epic saga through its legendary films</p>
+      </section>
+
+      <section className={styles.films}>
+        <div className={styles.grid}>
+          {films.map((film) => (
+            <div key={film.episode_id} className={styles.card}>
+              <div className={styles.cardContent}>
+                <div className={styles.episodeNumber}>Episode {film.episode_id}</div>
+                <h2 className={styles.filmTitle}>{film.title}</h2>
+                <div className={styles.filmMeta}>
+                  <p className={styles.releaseDate}>Released: {new Date(film.release_date).getFullYear()}</p>
+                  <p className={styles.director}>Director: {film.director}</p>
+                  <p className={styles.producer}>Producer: {film.producer}</p>
+                </div>
+                <p className={styles.openingCrawl}>
+                  {film.opening_crawl.split('.')[0]}...
+                </p>
+                <div className={styles.stats}>
+                  <div className={styles.stat}>
+                    <span className={styles.statLabel}>Characters</span>
+                    <span className={styles.statValue}>{film.characters.length}</span>
+                  </div>
+                  <div className={styles.stat}>
+                    <span className={styles.statLabel}>Planets</span>
+                    <span className={styles.statValue}>{film.planets.length}</span>
+                  </div>
+                  <div className={styles.stat}>
+                    <span className={styles.statLabel}>Vehicles</span>
+                    <span className={styles.statValue}>{film.vehicles.length}</span>
+                  </div>
+                </div>
+                <Link href={routes.film(film.episode_id)} className={styles.viewDetails}>
+                  View Details
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

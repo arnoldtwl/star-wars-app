@@ -114,6 +114,18 @@ export async function getRelatedData(urls) {
   }
 }
 
+export async function getFilmIds() {
+  try {
+    const { results } = await getFilms()
+    return results.map((film) => ({
+      id: film.episode_id.toString(),
+    }))
+  } catch (error) {
+    console.error('Error fetching film IDs:', error)
+    throw new Error('Failed to load film IDs')
+  }
+}
+
 // Error handling utility
 export function handleApiError(error) {
   console.error('API Error:', error)

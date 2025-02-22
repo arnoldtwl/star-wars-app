@@ -1,18 +1,13 @@
 import Link from 'next/link'
 import styles from './page.module.css'
-import { getFilm } from '@/app/lib/api'
+import { getFilm, getFilmIds, routes } from '@/app/lib/api'
 
 async function generateStaticParams() {
-  const res = await fetch('https://swapi.dev/api/films/')
-  const data = await res.json()
-  
-  return data.results.map((film) => ({
-    id: film.episode_id.toString(),
-  }))
+  return await getFilmIds()
 }
 
 export default async function FilmPage({ params }) {
-  const { id } = await params
+  const { id } = params
   const film = await getFilm(id)
 
   return (
@@ -25,23 +20,23 @@ export default async function FilmPage({ params }) {
         <p className={styles.crawl}>{film.opening_crawl}</p>
       </div>
       <div className={styles.links}>
-        <Link href={`/film/${film.episode_id}/characters`} className={styles.linkItem}>
+        <Link href={routes.filmCharacters(film.episode_id)} className={styles.linkItem}>
           Characters
         </Link>
-        <Link href={`/film/${film.episode_id}/planets`} className={styles.linkItem}>
+        <Link href={routes.filmPlanets(film.episode_id)} className={styles.linkItem}>
           Planets
         </Link>
-        <Link href={`/film/${film.episode_id}/starships`} className={styles.linkItem}>
+        <Link href={routes.filmStarships(film.episode_id)} className={styles.linkItem}>
           Starships
         </Link>
-        <Link href={`/film/${film.episode_id}/vehicles`} className={styles.linkItem}>
+        <Link href={routes.filmVehicles(film.episode_id)} className={styles.linkItem}>
           Vehicles
         </Link>
-        <Link href={`/film/${film.episode_id}/species`} className={styles.linkItem}>
+        <Link href={routes.filmSpecies(film.episode_id)} className={styles.linkItem}>
           Species
         </Link>
       </div>
-      <Link href="/" className={styles.backLink}>
+      <Link href={routes.home} className={styles.backLink}>
         Back to Films
       </Link>
     </div>

@@ -32,3 +32,147 @@
     background: rgba(255, 197, 0, 0.2);  /* Star Wars gold with opacity */
     transform: translateX(10px);
 }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  background: linear-gradient(rgba(2, 12, 27, 0.8), rgba(2, 12, 27, 0.8)),
+              url('/images/stars-bg.jpg') center/cover;
+  border-radius: 8px;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  color: #ffc500;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 197, 0, 0.3);
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: #8892b0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.card {
+  background: rgba(2, 12, 27, 0.7);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(136, 146, 176, 0.1);
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 197, 0, 0.2);
+}
+
+.cardContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.episodeNumber {
+  color: #ffc500;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.filmTitle {
+  font-size: 1.5rem;
+  color: #64ffda;
+  margin-bottom: 1rem;
+}
+
+.filmMeta {
+  color: #8892b0;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.filmMeta p {
+  margin: 0.25rem 0;
+}
+
+.openingCrawl {
+  color: #a8b2d1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(136, 146, 176, 0.1);
+  border-bottom: 1px solid rgba(136, 146, 176, 0.1);
+  align-items: center;
+}
+
+.stat {
+  text-align: center;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.statLabel {
+  display: block;
+  color: #8892b0;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.statValue {
+  color: #64ffda;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.viewDetails {
+  display: inline-block;
+  width: auto;
+  padding: 0.75rem 2rem;
+  text-align: center;
+  background: transparent;
+  color: #ffc500;
+  border: 1px solid #ffc500;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.viewDetails:hover {
+  background: rgba(255, 197, 0, 0.1);
+  box-shadow: 0 0 10px rgba(255, 197, 0, 0.2);
+}
