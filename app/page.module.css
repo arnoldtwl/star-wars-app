@@ -1,0 +1,34 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    color: #ffc500;  /* Star Wars gold */
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filmList {
+    display: block;
+    padding: 15px 20px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #f4f4f4;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.filmList:hover {
+    background: rgba(255, 197, 0, 0.2);  /* Star Wars gold with opacity */
+    transform: translateX(10px);
+}

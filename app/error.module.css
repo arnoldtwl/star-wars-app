@@ -1,0 +1,35 @@
+.errorContainer {
+  padding: 2rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.errorTitle {
+  color: #ffc500;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.errorMessage {
+  color: #f4f4f4;
+  margin-bottom: 1.5rem;
+}
+
+.errorButton {
+  background: #ffc500;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  color: #020c1b;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.errorButton:hover {
+  background: #ffcd33;
+  transform: translateY(-2px);
+}

@@ -1,72 +1,104 @@
-# Star Wars App
+# Star Wars Information App
 
-## Overview
+A Next.js application that displays information about Star Wars films and related data using the SWAPI (Star Wars API).
 
-This is a Next.js application that utilizes the Star Wars API (SWAPI) to display information about Star Wars films, characters, planets, starships, vehicles, and species. The app is built with modern React features and styled with CSS.
+## 🚀 Features
 
-## Features
+- View all Star Wars films
+- Detailed information for each film
+- Related data for characters, planets, starships, vehicles, and species
+- Server-side rendering for optimal performance
+- Responsive design with Star Wars themed UI
+- Error handling and loading states
 
-- List all Star Wars films on the homepage.
-- View details about each film, including its director, producer, release date, and opening crawl.
-- Navigate to specific pages to view lists of characters, planets, starships, vehicles, and species associated with each film.
+## 📦 Tech Stack
 
-## Technologies Used
+- Next.js 15 (App Router)
+- React
+- CSS Modules
+- SWAPI (Star Wars API)
 
-- Next.js 13.5.2
-- React 18.2.0
-- ESLint 8.50.0 for linting
+## 🛠️ Project Structure
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js and npm must be installed on your machine.
-
-### Installation
-
-1. Clone the repository to your local machine.
-
-    ```bash
-    git clone https://github.com/your-username/star-wars-app.git
-    ```
-
-2. Navigate into the project directory.
-
-    ```bash
-    cd star-wars-app
-    ```
-
-3. Install the project dependencies.
-
-    ```bash
-    npm install
-    ```
-
-### Running the App
-
-To run the app in development mode, execute:
-
-```bash
-npm run dev
+```
+star-wars-app/
+├── app/                    # App Router directory
+│   ├── lib/               # Utilities and API functions
+│   ├── film/             # Film-related routes
+│   │   └── [id]/         # Dynamic film routes
+│   ├── layout.js         # Root layout
+│   ├── page.js           # Home page
+│   └── not-found.js      # 404 page
+└── public/               # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the app in the browser.
+## 🚦 Getting Started
 
-### Building the App
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-To build the app for production, execute:
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm run build
-```
+3. Open [http://localhost:3000](http://localhost:3000)
 
-### Starting the Production Server
+## 🌟 Key Features
 
-To start the production server, execute:
+- Server Components for improved performance
+- Streaming and Suspense for better loading states
+- Incremental Static Regeneration (ISR) for data caching
+- Error boundaries for robust error handling
+- Responsive and accessible design
 
-```bash
-npm start
-```
+## 📝 API Documentation
+
+The app uses SWAPI (Star Wars API) for data. Main endpoints:
+
+- `/films` - List all films
+- `/films/{id}` - Get specific film
+- Related endpoints for characters, planets, etc.
+
+Data is cached using Next.js 15's built-in caching mechanisms.
+
+## 🎨 Styling
+
+- CSS Modules for component-scoped styling
+- Star Wars themed design
+- Responsive layouts
+- Loading animations
+
+## ⚡ Performance
+
+- Server-side rendering
+- Automatic image optimization
+- Route prefetching
+- API response caching
+
+## 🔧 Error Handling
+
+- Global error boundary
+- Per-route error handling
+- Fallback UI components
+- Detailed error logging
+
+## 📱 Accessibility
+
+- Semantic HTML
+- ARIA attributes
+- Keyboard navigation
+- Color contrast compliance
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Push to the branch
+5. Open a pull request
 
 ## License
 
