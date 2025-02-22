@@ -2,49 +2,68 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 100vh;
+  background-color: #020c1b;
+  color: #ccd6f6;
 }
 
 .title {
   color: #ffc500;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 2rem;
+  padding: 1rem;
 }
 
 .card {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(2, 12, 27, 0.7);
   border: 1px solid #ffc500;
   border-radius: 8px;
   padding: 1.5rem;
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(255, 197, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(255, 197, 0, 0.2);
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   color: #f4f4f4;
 }
 
 .name {
   color: #ffc500;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
 .detail {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0;
   color: #f4f4f4;
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
+}
+
+.label {
+  color: #8892b0;
+  display: inline;
+}
+
+.value {
+  color: #64ffda;
+  display: inline;
+  margin-left: 0.3rem;
 }
 
 .backLink {

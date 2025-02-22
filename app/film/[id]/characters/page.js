@@ -59,21 +59,42 @@ export default async function CharactersPage({ params }) {
           <div key={character.name} className={styles.card}>
             <div className={styles.info}>
               <h2 className={styles.name}>{character.name}</h2>
-              <p className={styles.detail}>Species: {character.speciesName}</p>
-              <p className={styles.detail}>Homeworld: {character.homeworldName}</p>
-              <p className={styles.detail}>Born: {character.birth_year === 'unknown' ? 'Unknown' : character.birth_year}</p>
-              <p className={styles.detail}>Gender: {character.gender === 'n/a' ? 'Unknown' : character.gender}</p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Species:</span>
+                <span className={styles.value}>{character.speciesName}</span>
+              </p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Homeworld:</span>
+                <span className={styles.value}>{character.homeworldName}</span>
+              </p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Born:</span>
+                <span className={styles.value}>
+                  {character.birth_year === 'unknown' ? 'Unknown' : character.birth_year}
+                </span>
+              </p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Gender:</span>
+                <span className={styles.value}>
+                  {character.gender === 'n/a' ? 'Unknown' : character.gender}
+                </span>
+              </p>
               {character.height !== 'unknown' && (
-                <p className={styles.detail}>Height: {character.height}cm</p>
+                <p className={styles.detail}>
+                  <span className={styles.label}>Height:</span>
+                  <span className={styles.value}>{character.height}cm</span>
+                </p>
               )}
               {character.starships.length > 0 && (
                 <p className={styles.detail}>
-                  Starships: {character.starships.join(', ')}
+                  <span className={styles.label}>Starships:</span>
+                  <span className={styles.value}>{character.starships.join(', ')}</span>
                 </p>
               )}
               {character.vehicles.length > 0 && (
                 <p className={styles.detail}>
-                  Vehicles: {character.vehicles.join(', ')}
+                  <span className={styles.label}>Vehicles:</span>
+                  <span className={styles.value}>{character.vehicles.join(', ')}</span>
                 </p>
               )}
             </div>
