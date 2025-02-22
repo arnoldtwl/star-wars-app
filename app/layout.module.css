@@ -5,30 +5,41 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
     background: #0e1f36;  /* Slightly lighter space blue */
-    padding: 10px 20px;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .logo {
-    font-size: 1.8rem;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logoText {
     color: #f4f4f4;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
-.logo span {
+.logoHighlight {
     color: #ffc500;  /* Star Wars gold */
+    font-size: 1.8rem;
 }
 
 .content {
     flex: 1;
-    padding: 20px;
+    padding: 0;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
