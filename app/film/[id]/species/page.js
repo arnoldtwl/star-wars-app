@@ -15,13 +15,29 @@ export default async function SpeciesPage({ params }) {
           <div key={specie.name} className={styles.card}>
             <div className={styles.info}>
               <h2 className={styles.name}>{specie.name}</h2>
-              <p className={styles.detail}>Classification: {specie.classification === 'unknown' ? 'Unknown' : specie.classification}</p>
-              <p className={styles.detail}>Language: {specie.language === 'unknown' ? 'Unknown' : specie.language}</p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Classification:</span>
+                <span className={styles.value}>{specie.classification}</span>
+              </p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Designation:</span>
+                <span className={styles.value}>{specie.designation}</span>
+              </p>
+              <p className={styles.detail}>
+                <span className={styles.label}>Language:</span>
+                <span className={styles.value}>{specie.language}</span>
+              </p>
               {specie.average_height !== 'unknown' && (
-                <p className={styles.detail}>Average Height: {specie.average_height}cm</p>
+                <p className={styles.detail}>
+                  <span className={styles.label}>Average Height:</span>
+                  <span className={styles.value}>{specie.average_height}cm</span>
+                </p>
               )}
               {specie.average_lifespan !== 'unknown' && (
-                <p className={styles.detail}>Average Lifespan: {specie.average_lifespan} years</p>
+                <p className={styles.detail}>
+                  <span className={styles.label}>Average Lifespan:</span>
+                  <span className={styles.value}>{specie.average_lifespan} years</span>
+                </p>
               )}
             </div>
           </div>
