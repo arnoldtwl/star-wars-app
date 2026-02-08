@@ -13,6 +13,16 @@ const nextConfig = {
         hostname: 'lumiere-a.akamaihd.net',
         pathname: '/v1/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'static.wikia.nocookie.net',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+        pathname: '/**',
+      },
     ],
   },
 }

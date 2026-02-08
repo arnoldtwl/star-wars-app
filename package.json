@@ -1,6 +1,6 @@
 {
   "name": "star-wars-app",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "eslint": "9.39.1",
-    "eslint-config-next": "16.0.10",
-    "next": "16.0.10",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@vercel/blob": "^2.2.0",
+    "baseline-browser-mapping": "^2.9.19",
+    "eslint": "10.0.0",
+    "eslint-config-next": "16.1.6",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   }
 }

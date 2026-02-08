@@ -1,0 +1,26 @@
+.card {
+    /* Reset button styles */
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    /* Match original card styles */
+    display: block;
+    width: 100%;
+    background: rgba(2, 12, 27, 0.7);
+    border: 1px solid #ffc500;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(255, 197, 0, 0.2);
+}
+
+.card:focus-visible {
+    outline: 2px solid #64ffda;
+    outline-offset: 2px;
+}

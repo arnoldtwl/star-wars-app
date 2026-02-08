@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from './page.module.css'
-import { getFilm, getFilmIds, routes } from '@/app/lib/api'
+import { getFilm, getFilmIds, routes } from '@/app/lib/swapi'
 
 async function generateStaticParams() {
   return await getFilmIds()
