@@ -4,16 +4,35 @@
  * Supported types: people, planets, species, starships, vehicles
  */
 
-const SWAPI_BASE = 'https://swapi.dev/api'
+import {
+    getPlanet,
+    getSpecies,
+    getStarship,
+    getVehicle
+} from '../../../../lib/swapi'
 
-const VALID_TYPES = ['people', 'planets', 'species', 'starships', 'vehicles']
+// SWAPI 'people' is often called from generic route
+async function getPerson(id) {
+    const url = `https://swapi.dev/api/people/${id}/`
+    const res = await fetch(url, { next: { revalidate: 86400, tags: ['swapi', 'people'] } })
+    if (!res.ok) throw new Error(`Failed to fetch person: ${res.status}`)
+    return res.json()
+}
+
+const RESOURCE_HANDLERS = {
+    planets: getPlanet,
+    species: getSpecies,
+    starships: getStarship,
+    vehicles: getVehicle,
+    people: getPerson
+}
 
 export async function GET(request, { params }) {
     const { type, id } = await params
 
-    if (!VALID_TYPES.includes(type)) {
+    if (!RESOURCE_HANDLERS[type]) {
         return Response.json(
-            { error: `Invalid resource type: ${type}. Valid types: ${VALID_TYPES.join(', ')}` },
+            { error: `Invalid resource type: ${type}. Valid types: ${Object.keys(RESOURCE_HANDLERS).join(', ')}` },
             { status: 400 }
         )
     }
@@ -26,32 +45,13 @@ export async function GET(request, { params }) {
     }
 
     try {
-        const response = await fetch(`${SWAPI_BASE}/${type}/${id}/`, {
-            next: {
-                revalidate: 86400, // 24 hour cache
-                tags: ['swapi', type, `${type}-${id}`]
-            }
-        })
-
-        if (!response.ok) {
-            if (response.status === 404) {
-                return Response.json(
-                    { error: `${type} ${id} not found` },
-                    { status: 404 }
-                )
-            }
-            return Response.json(
-                { error: `Failed to fetch ${type} from SWAPI` },
-                { status: response.status }
-            )
-        }
-
-        const resource = await response.json()
+        const handler = RESOURCE_HANDLERS[type]
+        const resource = await handler(id)
         return Response.json(resource)
     } catch (error) {
         console.error(`SWAPI ${type}/${id} error:`, error)
         return Response.json(
-            { error: 'Internal server error' },
+            { error: error.message || 'Internal server error' },
             { status: 500 }
         )
     }

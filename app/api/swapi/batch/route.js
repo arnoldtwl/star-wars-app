@@ -4,7 +4,7 @@
  * Request body: { urls: string[] }
  */
 
-const SWAPI_BASE = 'https://swapi.dev/api'
+import { getRelatedData } from '../../../lib/swapi'
 
 export async function POST(request) {
     try {
@@ -35,34 +35,12 @@ export async function POST(request) {
             )
         }
 
-        // Fetch all URLs in parallel
-        const results = await Promise.all(
-            urls.map(async (url) => {
-                try {
-                    const response = await fetch(url, {
-                        next: {
-                            revalidate: 86400, // 24 hour cache
-                            tags: ['swapi', 'batch']
-                        }
-                    })
-
-                    if (!response.ok) {
-                        return { error: `Failed to fetch ${url}`, status: response.status }
-                    }
-
-                    return await response.json()
-                } catch (error) {
-                    console.error(`Batch fetch error for ${url}:`, error)
-                    return { error: `Failed to fetch ${url}` }
-                }
-            })
-        )
-
+        const results = await getRelatedData(urls)
         return Response.json({ results })
     } catch (error) {
         console.error('SWAPI batch error:', error)
         return Response.json(
-            { error: 'Internal server error' },
+            { error: error.message || 'Internal server error' },
             { status: 500 }
         )
     }

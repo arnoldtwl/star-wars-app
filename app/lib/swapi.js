@@ -9,48 +9,44 @@ export const routes = {
   filmVehicles: (id) => `/film/${id}/vehicles`,
 }
 
+import { getFilmPoster } from './filmImages'
+
+const SWAPI_BASE = 'https://swapi.dev/api'
+
 /**
- * Get the base URL for API calls
- * In server components, we need the full URL
+ * Shared fetch helper that hits SWAPI directly
  */
-function getBaseUrl() {
-  // Check if we're on the server
-  if (typeof window === 'undefined') {
-    // Server-side: use environment variable or localhost
-    return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+async function fetchFromSwapi(endpoint, options = {}) {
+  const url = endpoint.startsWith('http') ? endpoint : `${SWAPI_BASE}${endpoint}`
+
+  const res = await fetch(url, {
+    next: {
+      revalidate: 86400, // Cache for 24 hours
+      tags: ['swapi']
+    },
+    ...options
+  })
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch from SWAPI: ${res.status} ${res.statusText}`)
   }
-  // Client-side: use relative URLs
-  return ''
-}
 
-async function fetchFromApi(endpoint, options = {}) {
-  const baseUrl = getBaseUrl()
-  const url = `${baseUrl}${endpoint}`
-
-  try {
-    const res = await fetch(url, {
-      next: {
-        revalidate: 86400, // Cache for 24 hours
-        tags: ['swapi']
-      },
-      ...options
-    })
-
-    if (!res.ok) {
-      const error = await res.json().catch(() => ({}))
-      throw new Error(error.error || `Failed to fetch data: ${res.status} ${res.statusText}`)
-    }
-
-    return res.json()
-  } catch (error) {
-    console.error(`API Error fetching ${endpoint}:`, error)
-    throw new Error(error.message || 'Failed to fetch data')
-  }
+  return res.json()
 }
 
 export async function getFilms() {
   try {
-    return await fetchFromApi('/api/swapi/films')
+    const data = await fetchFromSwapi('/films/')
+
+    // Enrich with posters and sort by episode_id
+    const results = data.results
+      .map(film => ({
+        ...film,
+        posterUrl: getFilmPoster(film.episode_id)
+      }))
+      .sort((a, b) => a.episode_id - b.episode_id)
+
+    return { ...data, results }
   } catch (error) {
     console.error('Error fetching films:', error)
     throw new Error('Failed to load Star Wars films')
@@ -59,7 +55,11 @@ export async function getFilms() {
 
 export async function getFilm(id) {
   try {
-    return await fetchFromApi(`/api/swapi/films/${id}`)
+    const film = await fetchFromSwapi(`/films/${id}/`)
+    return {
+      ...film,
+      posterUrl: getFilmPoster(film.episode_id)
+    }
   } catch (error) {
     console.error(`Error fetching film ${id}:`, error)
     throw new Error(`Failed to load Star Wars film Episode ${id}`)
@@ -67,48 +67,23 @@ export async function getFilm(id) {
 }
 
 export async function getHumanSpecies() {
-  try {
-    return await fetchFromApi('/api/swapi/species/1')
-  } catch (error) {
-    console.error('Error fetching human species:', error)
-    throw new Error('Failed to load human species data')
-  }
+  return fetchFromSwapi('/species/1/')
 }
 
 export async function getPlanet(id) {
-  try {
-    return await fetchFromApi(`/api/swapi/planets/${id}`)
-  } catch (error) {
-    console.error(`Error fetching planet ${id}:`, error)
-    throw new Error('Failed to load planet data')
-  }
+  return fetchFromSwapi(`/planets/${id}/`)
 }
 
 export async function getSpecies(id) {
-  try {
-    return await fetchFromApi(`/api/swapi/species/${id}`)
-  } catch (error) {
-    console.error(`Error fetching species ${id}:`, error)
-    throw new Error('Failed to load species data')
-  }
+  return fetchFromSwapi(`/species/${id}/`)
 }
 
 export async function getStarship(id) {
-  try {
-    return await fetchFromApi(`/api/swapi/starships/${id}`)
-  } catch (error) {
-    console.error(`Error fetching starship ${id}:`, error)
-    throw new Error('Failed to load starship data')
-  }
+  return fetchFromSwapi(`/starships/${id}/`)
 }
 
 export async function getVehicle(id) {
-  try {
-    return await fetchFromApi(`/api/swapi/vehicles/${id}`)
-  } catch (error) {
-    console.error(`Error fetching vehicle ${id}:`, error)
-    throw new Error('Failed to load vehicle data')
-  }
+  return fetchFromSwapi(`/vehicles/${id}/`)
 }
 
 export async function getRelatedData(urls) {
@@ -117,25 +92,17 @@ export async function getRelatedData(urls) {
   }
 
   try {
-    const baseUrl = getBaseUrl()
-    const res = await fetch(`${baseUrl}/api/swapi/batch`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ urls }),
-      next: {
-        revalidate: 86400,
-        tags: ['swapi', 'batch']
-      }
-    })
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch related data')
-    }
-
-    const data = await res.json()
-    return data.results
+    const results = await Promise.all(
+      urls.map(async (url) => {
+        try {
+          return await fetchFromSwapi(url)
+        } catch (error) {
+          console.error(`Batch fetch error for ${url}:`, error)
+          return { error: `Failed to fetch ${url}` }
+        }
+      })
+    )
+    return results
   } catch (error) {
     console.error('Error fetching related data:', error)
     throw new Error('Failed to load related Star Wars data')
@@ -159,4 +126,3 @@ export function handleApiError(error) {
   console.error('API Error:', error)
   throw new Error(error.message || 'An error occurred while fetching data')
 }
-
