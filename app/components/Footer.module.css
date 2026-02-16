@@ -1,0 +1,32 @@
+.footer {
+    background: #0e1f36;
+    /* Deep space blue, matching header */
+    color: #f4f4f4;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-top: auto;
+    /* Push to bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #1a2f4d;
+}
+
+.text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.authorLink {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.authorLink:hover {
+    color: #ffc500;
+    /* Star Wars gold */
+    text-decoration: underline;
+}

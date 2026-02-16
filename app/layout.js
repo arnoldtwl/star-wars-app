@@ -1,10 +1,12 @@
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import styles from './layout.module.css'
+import Footer from './components/Footer'
+import Header from './components/Header'
 import './globals.css'
 
 // Initialize the Inter font with subset latin
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
@@ -19,15 +21,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div className={styles.layout}>
-          <header className={styles.header}>
-            <Link href="/" className={styles.logo}>
-              <span className={styles.logoText}>Star Wars</span>
-              <span className={styles.logoHighlight}>Universe</span>
-            </Link>
-          </header>
-          <main>
+          <Header />
+          <main className={styles.content}>
             {children}
           </main>
+          <Footer />
         </div>
       </body>
     </html>

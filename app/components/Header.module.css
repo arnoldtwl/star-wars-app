@@ -1,0 +1,28 @@
+.header {
+    background: #0e1f36;
+    /* Slightly lighter space blue */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logoText {
+    color: #f4f4f4;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logoHighlight {
+    color: #ffc500;
+    /* Star Wars gold */
+    font-size: 1.8rem;
+}
